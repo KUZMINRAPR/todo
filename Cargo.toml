@@ -1,0 +1,11 @@
+[package]
+name = "todo_list"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+console = "0.15.8"
+dialoguer = "0.11.0"
+ratatui = "0.27.0"
+tokio = { version = "1.38.0", features = ["rt", "rt-multi-thread", "macros"] }
+tokio-postgres = { version = "0.7.10"}
