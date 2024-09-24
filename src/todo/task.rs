@@ -1,10 +1,11 @@
 use std::fmt::Display;
 use std::ops::Deref;
-type Status = bool;
-#[derive(Clone)]
+use ratatui::text::{Line, Text};
+
+#[derive(Clone,Eq, PartialEq)]
 pub struct Task{
     pub text: String,
-    pub status: Status
+    pub status: bool
 }
 
 impl Task{
@@ -22,6 +23,11 @@ impl Display for Task{
     }
 }
 
+impl From<&Task> for Text<'_> {
+    fn from(value: &Task) -> Self {
+        Self::from(format!("{} {}", value.text, value.status))
+    }
+}
 impl Task {
     pub fn is_done(&mut self) {
         self.status = true
