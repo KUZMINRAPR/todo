@@ -25,7 +25,8 @@ impl Display for Task{
 
 impl From<&Task> for Text<'_> {
     fn from(value: &Task) -> Self {
-        Self::from(format!("{} {}", value.text, value.status))
+        Self::from(format!("{}", value.text
+        ))
     }
 }
 impl Task {

@@ -1,5 +1,5 @@
 use ratatui::buffer::Buffer;
-use ratatui::layout::Rect;
+use ratatui::layout::{Constraint, Layout, Rect};
 use ratatui::prelude::{Stylize, Widget};
 use ratatui::text::Line;
 use ratatui::widgets::{Block, Borders, HighlightSpacing, List, ListItem, ListState, Padding, Paragraph, StatefulWidget, Wrap};
@@ -135,7 +135,11 @@ impl Widget for &mut Todo {
     where
         Self: Sized
     {
-        self.render_list(area,buf);
-        self.render_selected_task(area,buf);
+        let [main_area] = Layout::vertical([Constraint::Fill(1)]).areas(area);
+        let [list_area, item_area] = Layout::vertical([Constraint::Fill(1),Constraint::Fill(1)])
+            .areas(main_area);
+        self.render_list(list_area,buf);
+        self.render_selected_task(item_area,buf);
     }
 }
+
